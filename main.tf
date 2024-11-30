@@ -4,7 +4,7 @@ resource "google_compute_network" "app" {
   auto_create_subnetworks = false
 }
 
-resource "google_compute_subnetwork" var.network_name {
+resource "google_compute_subnetwork" "app" {
   name          = "var.network_name"
   ip_cidr_range = var.network_ip_cidr_range
   region        = var.region
@@ -18,7 +18,7 @@ data "google_compute_image" "ubuntu" {
   family      = var.image_family
 }
 
-resource "google_compute_instance" var.app_name {
+resource "google_compute_instance" "blog" {
   name         = var.app_name
   machine_type = var.vm_instance_type
 
