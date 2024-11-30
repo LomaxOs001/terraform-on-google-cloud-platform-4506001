@@ -35,5 +35,5 @@ variable "app_name" {
 
 variable "vm_instance_type" {
     type = string
-    default = "e2_micro"
+    default = "e2-micro"
 }
