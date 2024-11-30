@@ -29,7 +29,7 @@ resource "google_compute_instance" "blog" {
     }
   }
   network_interface {
-   subnetwork = var.network_namead
+   subnetwork = var.network_name
    access_config {
       # Leave empty for dynamic public IP
     }
