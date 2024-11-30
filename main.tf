@@ -1,25 +1,26 @@
-resource "google_compute_network" "app" {
-  name                    = "app"
+
+resource "google_compute_network" var.network_name {
+  name                    = var.network_name
   auto_create_subnetworks = false
 }
 
-resource "google_compute_subnetwork" "app" {
-  name          = "app"
-  ip_cidr_range = "10.2.0.0/16"
-  region        = "us-west1"
+resource "google_compute_subnetwork" var.network_name {
+  name          = "var.network_name"
+  ip_cidr_range = var.network_ip_cidr_range
+  region        = var.region
   network       = google_compute_network.app.id
   
 }
 
 data "google_compute_image" "ubuntu" {
   most_recent = true
-  project     = "ubuntu-os-cloud" 
-  family      = "ubuntu-2204-lts"
+  project     = var.image_project
+  family      = var.image_family
 }
 
-resource "google_compute_instance" "web" {
-  name         = "web"
-  machine_type = "e2-micro"
+resource "google_compute_instance" var.app_name {
+  name         = var.app_name
+  machine_type = var.vm_instance_type
 
   
   boot_disk {
@@ -28,7 +29,7 @@ resource "google_compute_instance" "web" {
     }
   }
   network_interface {
-   subnetwork = "app"
+   subnetwork = var.network_namead
    access_config {
       # Leave empty for dynamic public IP
     }
